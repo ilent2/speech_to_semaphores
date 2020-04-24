@@ -19,20 +19,18 @@ class SpeakSemaphores(object):
         self._display = Display()
         self._listener = Listener()
 
-    def run(self):
+    def run(self, show_ascii=False):
         """ Run the joke (convert from text to semaphores) """
 
         while True:
 
             # Get some text
             text = self._listener.listen()
-            if not text:
-                return
 
             # Display the result
-            self._display.show(text)
+            self._display.show(text, show_ascii=show_ascii)
 
 if __name__ == '__main__':
     joke = SpeakSemaphores()
-    joke.run()
+    joke.run(show_ascii=True)
 

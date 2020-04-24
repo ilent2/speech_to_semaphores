@@ -35,3 +35,9 @@ joke.run()
 
 Use a keyboard interrupt `Ctrl+C` to stop the program.
 
+You can also display ASCII characters with
+
+```python
+joke.run(show_ascii=True)
+```
+

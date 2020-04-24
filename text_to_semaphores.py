@@ -133,4 +133,5 @@ if __name__ == '__main__':
     test_string = "This is some text"
     disp = Display()
     disp.show(test_string, show_ascii=True)
+    #disp.show(None, show_ascii=True)
 
