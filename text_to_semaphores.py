@@ -4,6 +4,8 @@
 #   from text_to_semaphores import Display
 #   disp = Display()
 #   disp.show('This is some text')
+#
+# Copyright Isaac Lenton, 2020
 
 import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
@@ -85,7 +87,8 @@ class Display(object):
             fname = os.path.join(flags_dir, fname)
             self._images[k] = mpimg.imread(fname)
 
-        # TODO: Open a window for display
+        # Open a window for display
+        self._figure = plt.figure()
         plt.ion()
 
     def _show_image(self, text, im, show_ascii):
@@ -101,6 +104,54 @@ class Display(object):
             plt.text(65, 10, text, fontsize=30)
 
         plt.pause(self._delay)
+
+    def to_gif(self, fname, text, show_ascii=False, duration=300):
+        """ Generate a GIF of the sequence
+
+        disp.to_gif(fname, "text", show_ascii=False, duration=300)
+        Generate a gif and write to the specified file naem.
+        Duration specifies delay between each frame (miliseconds)
+
+        Requires the gif package
+
+        """
+
+        # Only import here (only needed for gifs)
+        import gif
+
+        @gif.frame
+        def gif_frame(text, im, show_ascii):
+            # Display the image
+            plt.cla()
+            plt.imshow(im)
+            plt.axis('image')
+
+            # Display the ascii representation
+            if show_ascii:
+                plt.text(65, 10, text, fontsize=30)
+
+
+        frames = []
+
+        if not text:
+            # Check if we have work to do
+            im = self._images[':error']
+            frame = gif_frame('ER!', im, show_ascii)
+            frames.append(frame)
+
+        else:
+            # Display the contents of text
+            for ch in text:
+                im = self._images[ch.lower()]
+                frame = gif_frame(ch, im, show_ascii)
+                frames.append(frame)
+
+            # Display the ready message
+            im = self._images[':ready']
+            frame = gif_frame('', im, show_ascii)
+            frames.append(frame)
+
+        gif.save(frames, fname, duration=duration)
 
     def show(self, text, show_ascii=False):
         """ Display text using semaphore flags
@@ -130,8 +181,15 @@ class Display(object):
 
 if __name__ == '__main__':
 
-    test_string = "This is some text"
+    test_string = "OH CATHERINE   OH HEATHCLIFFE"
     disp = Display()
+
+    # Test display text
     disp.show(test_string, show_ascii=True)
-    #disp.show(None, show_ascii=True)
+
+    # Test display none
+    disp.show(None, show_ascii=True)
+
+    # Write a gif to a file
+    disp.to_gif("test.gif", test_string, show_ascii=True)
 

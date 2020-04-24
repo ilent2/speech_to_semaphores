@@ -11,10 +11,11 @@ similarly inclined friends via Zoom during a Pandemic lock-down.
 Requirements
 ------------
 
-  * Python (2.7, but should work with 3.x)
+  * Python (2.7 | 3.6)
   * SpeechRecognition (3.8.1)
-  * matplotlib (2.0)
+  * matplotlib (2.0 | 3.2.1)
   * pyaudio (0.2.11)
+  * gif (1.0.3, required for gif generation)
 
 Example usage
 -------------
@@ -40,4 +41,18 @@ You can also display ASCII characters with
 ```python
 joke.run(show_ascii=True)
 ```
+
+Generate a gif
+--------------
+
+You can also use the Semaphore generator to create a GIF
+
+```python
+from text_to_semaphores import Display
+test_string = "OH CATHERINE   OH HEATHCLIFFE"
+disp = Display()
+disp.to_gif("test.gif", test_string, show_ascii=True, duration=500)
+```
+
+![Wuthering Heights](/example_gif/heights.gif)
 

@@ -7,6 +7,8 @@
 #   from speech_to_text import Listener
 #   listener = Listener()
 #   text = listener.listen()
+#
+# Copyright Isaac Lenton, 2020
 
 import speech_recognition as sr
 

@@ -6,6 +6,8 @@
 #   joke = SpeakSemaphores()
 #   joke.run()
 #   # Speak some text, watch the result, press Ctrl+C to stop
+#
+# Copyright Isaac Lenton, 2020
 
 from speech_to_text import Listener
 from text_to_semaphores import Display
