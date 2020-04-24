@@ -88,6 +88,20 @@ class Display(object):
         # TODO: Open a window for display
         plt.ion()
 
+    def _show_image(self, text, im, show_ascii):
+        """ Display an image using matplotlib """
+
+        # Display the image
+        plt.cla()
+        plt.imshow(im)
+        plt.axis('image')
+
+        # Display the ascii representation
+        if show_ascii:
+            plt.text(65, 10, text, fontsize=30)
+
+        plt.pause(self._delay)
+
     def show(self, text, show_ascii=False):
         """ Display text using semaphore flags
 
@@ -98,21 +112,21 @@ class Display(object):
         Also dispays the ASCII text
         """
 
+        # Check if we have work to do
+        if not text:
+            im = self._images[':error']
+            self._show_image('ER!', im, show_ascii)
+            return
+
+        # Display the contents of text
         for ch in text:
-
-            # Get the image
             im = self._images[ch.lower()]
+            self._show_image(ch, im, show_ascii)
 
-            # Display the image
-            plt.cla()
-            plt.imshow(im)
-            plt.axis('image')
+        # Display the ready message
+        im = self._images[':ready']
+        self._show_image('', im, show_ascii)
 
-            # Display the ascii representation
-            if show_ascii:
-                plt.text(65, 10, ch, fontsize=30)
-
-            plt.pause(self._delay)
 
 if __name__ == '__main__':
 
