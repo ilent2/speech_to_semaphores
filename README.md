@@ -1,6 +1,6 @@
 
-speech_to_semaphores
-####################
+Speech to Semaphores
+====================
 
 Python speech to (maritime) semaphore flags.
 Tools for converts speech to text and displaying the corresponding
@@ -9,7 +9,7 @@ Very little practical purposes, may be useful for communicating with
 similarly inclined friends via Zoom during a Pandemic lock-down.
 
 Requirements
-============
+------------
 
   * Python (2.7, but should work with 3.x)
   * SpeechRecognition (3.8.1)
@@ -17,7 +17,7 @@ Requirements
   * pyaudio (0.2.11)
 
 Example usage
-=============
+-------------
 
 Either run from the command line
 
